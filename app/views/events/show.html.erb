@@ -48,6 +48,30 @@
 				<%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-success btn-lg btn-block' %>
 				<%= link_to 'Delete', event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: 'Do you want to really delete?'} %>
 			<% end %>
+			<% if logged_in? %>
+				<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">Join</button>
+				<div class="modal fade" id="createTicket" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="dialogHeader">Comment</h4>
+							</div>
+							<%= form_for(@event.tickets.build, url: event_tickets_path(@event), remote:true) do |f| %>
+								<div class="modal-body">
+									<%= f.text_field :comment, class: 'form-control' %>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+									<%= f.button 'Send', class: 'btn btn-primary', data: { disable_with: 'Sending...' } %>
+								</div>	
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<% else %>
+				<%= link_to 'Join', new_event_ticket_path(@event), class: 'btn btn-success btn-lg btn-block' %>
+			<% end %>
 		</div>
 	</div>
 </div>
