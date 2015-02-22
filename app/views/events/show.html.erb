@@ -48,7 +48,9 @@
 				<%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-success btn-lg btn-block' %>
 				<%= link_to 'Delete', event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: 'Do you want to really delete?'} %>
 			<% end %>
-			<% if logged_in? %>
+			<% if @ticket %>
+				<%= link_to 'Cancel Join', event_ticket_path(@event, @ticket), method: :delete, class: 'btn btn-warning btn-lg btn-block' %>
+			<% elsif logged_in? %>
 				<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">Join</button>
 				<div class="modal fade" id="createTicket" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
 					<div class="modal-dialog">
