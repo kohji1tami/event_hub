@@ -1,0 +1,25 @@
+<div class="page-header">
+	<h1>Confirm Retire</h1>
+</div>
+<% if current_user.errors.any? %>
+	<div class="alert alert-danger">
+		<ul>
+			<% current_user.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<p>If you retire EventHub, your all data will be deleted.</p>
+<p>But, in following situations, you can't retire EventHub.</p>
+<ul>
+	<li>
+		You have a event which not done.
+	</li>
+	<li>
+		You will join event which not done.
+	</li>
+</ul>
+<hr>
+<%= link_to 'Retire', user_path, method: :delete, class: 'btn btn-danger' %>
