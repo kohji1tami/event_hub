@@ -48,6 +48,28 @@
 		</div>
 	</div>
 		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Participant
+				</div>
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<% @tickets.each do |ticket| %>
+							<% if ticket.user %>
+								<li>
+									<%= link_to(url_for_twitter(ticket.user)) do %>
+										<%= image_tag ticket.user.image_url, width: 20, height: 20 %>
+										<%= "@#{ticket.user.nickname}" %>
+									<% end %>
+									<%= ticket.comment %>
+								</li>
+							<% else %>
+								This user retired.
+							<% end %>
+						<% end %>
+					</ul>
+				</div>
+			</div>
 			<% if @event.created_by?(current_user) %>
 				<%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-success btn-lg btn-block' %>
 				<%= link_to 'Delete', event_path(@event), class: 'btn btn-danger btn-lg btn-block', method: :delete, data: { confirm: 'Do you want to really delete?'} %>
@@ -78,30 +100,6 @@
 			<% else %>
 				<%= link_to 'Join', new_event_ticket_path(@event), class: 'btn btn-success btn-lg btn-block' %>
 			<% end %>
-			<hr>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Participant
-					</div>
-					<div class="panel-body">
-						<ul class="list-unstyled">
-							<% @tickets.each do |ticket| %>
-								<% if ticket.user %>
-									<li>
-										<%= link_to(url_for_twitter(ticket.user)) do %>
-											<%= image_tag ticket.user.image_url, width: 20, height: 20 %>
-											<%= "@#{ticket.user.nickname}" %>
-										<% end %>
-										<%= ticket.comment %>
-									</li>
-								<% else %>
-									This user retired.
-								<% end %>
-							<% end %>
-						</ul>
-					</div>
-				</div>
-			</hr>
 		</div>
 	</div>
 </div>
