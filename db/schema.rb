@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20150227165551) do
     t.datetime "start_time",  null: false
     t.datetime "end_time",    null: false
     t.text     "content",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "event_image"
   end
 
